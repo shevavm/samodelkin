@@ -1,11 +1,14 @@
 package com.bignerdranch.android
 
+//import kotlinx.coroutines.experimental.android.UI
+//import kotlinx.coroutines.experimental.launch
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bignerdranch.android.CharacterGenerator.fetchCharacterData
 import kotlinx.android.synthetic.main.activity_new_character.*
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 private const val CHARACTER_DATA_KEY = "CHARACTER_DATA_KEY"
 private var Bundle.characterData
@@ -48,7 +51,8 @@ class NewCharacterActivity : AppCompatActivity() {
             CharacterGenerator.generate()
 
         generateButton.setOnClickListener {
-            launch(UI){characterData = fetchCharacterData().await()
+            GlobalScope.launch(Dispatchers.Main){characterData = fetchCharacterData().await()
+            //launch(UI){characterData = fetchCharacterData().await()
             //CharacterGenerator.fromApiData("halfling, Lars Kizzy, 14, 13, 8")//.generate() 22.2, 22.5,22.8
             displayCharacterData()
             }//22.8

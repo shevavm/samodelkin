@@ -1,11 +1,12 @@
 package com.bignerdranch.android
 
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import java.io.Serializable
 import java.net.URL
 
-private const val CHARACTER_DATA_API = "https://chargen-api.herokuap.com/" //22.4
+private const val CHARACTER_DATA_API = "https://chargen-api.herokuapp.com/" //22.4
 
 private fun <T> List<T>.rand()=shuffled().first()
 private fun Int.roll()=(0 until this)
@@ -30,7 +31,7 @@ object CharacterGenerator {
         return CharacterData(name, race, dex, wis, str)
     }
     fun fetchCharacterData(): Deferred<CharacterGenerator.CharacterData> {
-        return async {
+        return GlobalScope.async {
             val apiData = URL(CHARACTER_DATA_API).readText()
             CharacterGenerator.fromApiData(apiData)
         }//22.4
