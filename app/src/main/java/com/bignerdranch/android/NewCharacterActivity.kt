@@ -18,14 +18,10 @@ class NewCharacterActivity : AppCompatActivity() {
         /*outState.putSerializable(CHARACTER_DATA_KEY, characterData)*/
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_character)
         /*
-        *
-        *
-        *
         val nameTextView = findViewById<TextView>(R.id.nameTextView)
         val raceTextView = findViewById<TextView>(R.id.raceTextView)
         val dexterityTextView = findViewById<TextView>(R.id.dexterityTextView)
@@ -49,7 +45,8 @@ class NewCharacterActivity : AppCompatActivity() {
             CharacterGenerator.generate()
 
         generateButton.setOnClickListener {
-            characterData=CharacterGenerator.generate()
+            characterData=CharacterGenerator.
+                fromApiData("halfling, Lars Kizzy, 14, 13, 8")//.generate() 22.2
             displayCharacterData()
         }
 
