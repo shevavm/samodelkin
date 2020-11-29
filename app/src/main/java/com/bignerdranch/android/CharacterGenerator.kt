@@ -1,5 +1,7 @@
 package com.bignerdranch.android
 
+import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.experimental.async
 import java.io.Serializable
 import java.net.URL
 
@@ -27,9 +29,10 @@ object CharacterGenerator {
             apiData.split(",")
         return CharacterData(name, race, dex, wis, str)
     }
-    fun fetchCharacterData(): CharacterGenerator.CharacterData {
+    fun fetchCharacterData(): Deferred<CharacterGenerator.CharacterData> {
+        return async {
         val apiData = URL(CHARACTER_DATA_API).readText()
-        return CharacterGenerator.fromApiData(apiData)
-    }//22.4
+        CharacterGenerator.fromApiData(apiData)
+    }//22.4, 22.7
 
 }
