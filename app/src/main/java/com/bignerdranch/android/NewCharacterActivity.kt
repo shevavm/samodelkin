@@ -2,6 +2,7 @@ package com.bignerdranch.android
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.bignerdranch.android.CharacterGenerator.fetchCharacterData
 import kotlinx.android.synthetic.main.activity_new_character.*
 
 private const val CHARACTER_DATA_KEY = "CHARACTER_DATA_KEY"
@@ -45,8 +46,7 @@ class NewCharacterActivity : AppCompatActivity() {
             CharacterGenerator.generate()
 
         generateButton.setOnClickListener {
-            characterData=CharacterGenerator.
-                fromApiData("halfling, Lars Kizzy, 14, 13, 8")//.generate() 22.2
+            characterData = fetchCharacterData()//CharacterGenerator.fromApiData("halfling, Lars Kizzy, 14, 13, 8")//.generate() 22.2, 22.5
             displayCharacterData()
         }
 
