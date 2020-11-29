@@ -18,4 +18,10 @@ object CharacterGenerator {
     private fun wis()= 3.roll()
     private fun str()= 5.roll()
     fun generate()=CharacterData(name= name(),race = race(),dex = dex(),wis = wis(),str = str())
+
+    fun fromApiData(apiData: String): CharacterData {
+        val (race, name, dex, wis, str) =
+            apiData.split(",")
+        return CharacterData(name, race, dex, wis, str)
+    }
 }
