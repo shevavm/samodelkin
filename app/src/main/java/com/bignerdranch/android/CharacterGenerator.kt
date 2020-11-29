@@ -31,8 +31,9 @@ object CharacterGenerator {
     }
     fun fetchCharacterData(): Deferred<CharacterGenerator.CharacterData> {
         return async {
-        val apiData = URL(CHARACTER_DATA_API).readText()
-        CharacterGenerator.fromApiData(apiData)
-    }//22.4, 22.7
+            val apiData = URL(CHARACTER_DATA_API).readText()
+            CharacterGenerator.fromApiData(apiData)
+        }//22.4
+    }//22.7
 
 }

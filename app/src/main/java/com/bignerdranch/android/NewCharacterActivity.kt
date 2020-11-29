@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bignerdranch.android.CharacterGenerator.fetchCharacterData
 import kotlinx.android.synthetic.main.activity_new_character.*
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.launch
 
 private const val CHARACTER_DATA_KEY = "CHARACTER_DATA_KEY"
 private var Bundle.characterData
@@ -42,12 +44,14 @@ class NewCharacterActivity : AppCompatActivity() {
             it.getSerializable(CHARACTER_DATA_KEY)
                     as CharacterGenerator.CharacterData
         } ?: CharacterGenerator.generate()*/
-        characterData=savedInstanceState?.characterData ?:
+        characterData = savedInstanceState?.characterData ?:
             CharacterGenerator.generate()
 
         generateButton.setOnClickListener {
-            characterData = fetchCharacterData()//CharacterGenerator.fromApiData("halfling, Lars Kizzy, 14, 13, 8")//.generate() 22.2, 22.5
+            launch(UI){characterData = fetchCharacterData().await()
+            //CharacterGenerator.fromApiData("halfling, Lars Kizzy, 14, 13, 8")//.generate() 22.2, 22.5,22.8
             displayCharacterData()
+            }//22.8
         }
 
         displayCharacterData()
@@ -56,10 +60,10 @@ class NewCharacterActivity : AppCompatActivity() {
     private fun displayCharacterData(){
         characterData.run {
             nameTextView.text = name
-            raceTextView.text=race
-            dexterityTextView.text=dex
-            wisdomTextView.text=wis
-            strengthTextView.text=str
+            raceTextView.text = race
+            dexterityTextView.text = dex
+            wisdomTextView.text = wis
+            strengthTextView.text = str
         }
     }
 }
