@@ -30,6 +30,6 @@ object CharacterGenerator {
     fun fetchCharacterData(): CharacterGenerator.CharacterData {
         val apiData = URL(CHARACTER_DATA_API).readText()
         return CharacterGenerator.fromApiData(apiData)
-    }
+    }//22.4
 
 }
